@@ -1,5 +1,6 @@
 package com.example.fiveletters_game.controller;
 
+import com.example.fiveletters_game.service.GameService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,13 @@ public class HomePageController {
         return "homePage";
     }
 
-    @GetMapping("/login")
-    public String loginPage(Model model){
-        model.addAttribute("title", "Главная страница");
-        return "login";
+    @GetMapping("/play")
+        public String playPage(){
+        return "playPage";
     }
-    @GetMapping("/hello")
-    public String hello(Model model){
-        model.addAttribute("title", "Главная страница");
-        return "hello";
+
+    @GetMapping("/get")
+        public void getWord(){
+        GameService.getRandomWord();
     }
 }
