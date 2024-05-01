@@ -21,8 +21,12 @@ public class HomePageController {
         return "playPage";
     }
 
-    @GetMapping("/get")
-        public void getWord(){
-        GameService.getRandomWord();
+    @GetMapping("/index")
+    public String play(){
+        return "index";
     }
+
 }
+
+
+
