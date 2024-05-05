@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100" data-bs-theme="auto">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100" data-bs-theme="auto"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Design by foolishdeveloper.com -->
-    <title>Glassmorphism login Form Tutorial in html css</title>
+    <title>Login Page</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -139,20 +140,17 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form>
-    <h3>Login Here</h3>
-
-    <label for="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username">
-
+<form th:action="@{/save}" th:object="${user}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Name">
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
-
-    <button>Log In</button>
-    <div class="social">
-        <div class="go"><i class="fab fa-google"></i>  Google</div>
-        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-    </div>
+    <input type="text" th:field="*{password}" id="password" placeholder="Password">
+    <button type="submit" value="Add User"></button>
 </form>
+
+<!--<form th:action="@{/save}" th:object="${customer}" method="post">-->
+<!--    <input type="hidden" th:field="${User}" />-->--
+<!--    <button type="submit">Delete</button>-->
+<!--</form>-->
 </body>
 </html>

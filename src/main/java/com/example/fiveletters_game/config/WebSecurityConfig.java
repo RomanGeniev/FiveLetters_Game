@@ -22,10 +22,12 @@ public class WebSecurityConfig {
 
 
     @Bean
-    public  UserDetailsService userDetailsService(){return new MyUserDetailsService();}
+    public UserDetailsService userDetailsService() {
+        return new MyUserDetailsService();
+    }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
@@ -38,12 +40,12 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/home", "/playPage", "/index", "/playing").permitAll()
-                        .requestMatchers("/templates/**","/static/**","resources/static/script.js","static/script.js").permitAll() // Добавляем эту строку
+                        .requestMatchers("/", "/home", "/playPage", "/playing","/login","/save","index").permitAll()
+                        .requestMatchers("/templates/**", "/static/**", "resources/static/script.js", "static/script.js").permitAll() // Добавляем эту строку
 
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
+                        .loginPage("/1")
                         .permitAll()
                 );
 
@@ -52,13 +54,13 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder(5);}
-
-
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(5);
     }
 
+
 //    @Bean
-//    public UserDetailsService userDetailsService() {
+//    public UserDetailsService userDetailsService1() {
 //        UserDetails user =
 //                User.withDefaultPasswordEncoder()
 //                        .username("user")
@@ -68,3 +70,4 @@ public class WebSecurityConfig {
 //
 //        return new InMemoryUserDetailsManager(user);
 //    }
+}

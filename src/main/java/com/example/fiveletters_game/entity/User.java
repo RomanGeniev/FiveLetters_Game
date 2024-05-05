@@ -1,7 +1,8 @@
 package com.example.fiveletters_game.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import javax.persistence.*;
 
 @Data
 @Entity
@@ -12,7 +13,9 @@ public class User {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
     private String name;
+    @NotBlank
     private String password;
     private String role;
 }
