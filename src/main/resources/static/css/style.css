@@ -6,7 +6,7 @@
 }
 body {
   height: 100vh;
-  background: linear-gradient(135deg, #c59cff, #7e5bfb);
+  background-color: rgba(0, 0, 0, 0.93);
 }
 .wrapper {
   position: absolute;
@@ -15,7 +15,7 @@ body {
   left: 50%;
   display: flex;
   gap: 1em;
-  background-color: #ffffff;
+  background-color: rgba(248, 246, 246, 0.71);
   padding: 1em;
   border-radius: 0.5em;
   box-shadow: 0 2.5em 3.75em rgba(30, 19, 70, 0.3);

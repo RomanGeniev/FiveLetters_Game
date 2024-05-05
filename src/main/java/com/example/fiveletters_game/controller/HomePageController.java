@@ -16,9 +16,9 @@ public class HomePageController {
         return "homePage";
     }
 
-    @GetMapping("/play")
-        public String playPage(){
-        return "playPage";
+    @GetMapping("/login")
+        public String login(){
+        return "login";
     }
 
     @GetMapping("/index")
