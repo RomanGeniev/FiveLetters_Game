@@ -3,8 +3,9 @@ package com.example.fiveletters_game.controller;
 import com.example.fiveletters_game.entity.User;
 import com.example.fiveletters_game.service.UserService;
 import jakarta.validation.Valid;
-import javassist.bytecode.ClassFile;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,11 @@ public class UserController {
     }
 
 
-    @GetMapping("/login")
+    @GetMapping("/registration")
         public String login(Model model){
         model.addAttribute("user", new User());
         System.out.println("ddd");
-        return "login";
+        return "registerPage";
     }
 
     @GetMapping("/index")
@@ -36,10 +37,14 @@ public class UserController {
 
     @PostMapping("/save")
         public String save(@ModelAttribute("user") @Valid User user){
-        System.out.println("wweew");
         userService.save(user);
-        return "redirect:login";
+        login();
+        return "login";
+    }
 
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
 }

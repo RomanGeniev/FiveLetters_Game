@@ -40,12 +40,13 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/home", "/playPage", "/playing","/login","/save","index").permitAll()
-                        .requestMatchers("/templates/**", "/static/**", "resources/static/script.js", "static/script.js").permitAll() // Добавляем эту строку
+                        .requestMatchers("/", "/home", "/playPage", "/playing","/login","/save","/registration","registerPage","login").permitAll()
+                        .requestMatchers("/templates/**", "/static/**", "resources/static/script.js", "static/script.js").permitAll()
+                        .requestMatchers("/hello","index").authenticated()
 
                 )
                 .formLogin((form) -> form
-                        .loginPage("/1")
+                        .loginPage("/login")
                         .permitAll()
                 );
 
@@ -55,7 +56,7 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(5);
+        return new BCryptPasswordEncoder();
     }
 
 
