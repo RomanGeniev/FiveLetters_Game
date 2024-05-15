@@ -42,9 +42,26 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/getUsers")
+    public void getUsers(){
+        userService.getUsersList();
+    }
+
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/admin")
+    public String adminPage(Model model){
+        model.addAttribute("users", userService.getUsersList());
+        return "adminPage";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+        return "redirect:/admin";
     }
 
 }

@@ -1,4 +1,3 @@
-
 let words = [
   "Zebra",
   "Sling",
@@ -87,7 +86,7 @@ const startGame = async () => {
 
 //Get random word
 const getRandom = () =>
-  words[Math.floor(Math.random() * words.length)].toUpperCase();
+    words[Math.floor(Math.random() * words.length)].toUpperCase();
 
 //Update input to disabled status and set focus
 const updateDivConfig = (element, disabledStatus) => {
@@ -100,32 +99,36 @@ const updateDivConfig = (element, disabledStatus) => {
 //Logic for writing in the inputs
 const checker = async (e) => {
   let value = e.target.value.toUpperCase();
-  //disable current input box
-  updateDivConfig(e.target, true);
-  if (value.length == 1) {
-    //if the word is lesss than 5 length and the button isn't backspace
-    if (inputCount <= 4 && e.key != "Backspace") {
-      //Attach the letter to the final word
-      finalWord += value;
-      if (inputCount < 4) {
-        //enable next
-        updateDivConfig(e.target.nextSibling, false);
-      }
+
+  // Проверяем нажатие клавиши Backspace
+  if (e.key == "Backspace") {
+    // Уменьшаем inputCount только если он положителен
+    if (inputCount > 0) {
+      inputCount -= 1;
     }
-    inputCount += 1;
-  } else if (value.length == 0 && e.key == "Backspace") {
-    //Empty input box anduser press Backspace
+    // Удаляем последний символ из finalWord
     finalWord = finalWord.substring(0, finalWord.length - 1);
-    if (inputCount == 0) {
-      //For first inputbox
-      updateDivConfig(e.target, false);
-      return false;
-    }
-    updateDivConfig(e.target, true);
-    e.target.previousSibling.value = "";
-    //enable previous and decrement count
+    // Обновляем состояние предыдущего input, чтобы позволить его ввод
     updateDivConfig(e.target.previousSibling, false);
-    inputCount = -1;
+    return;
+  }
+
+  // Disable current input box
+  updateDivConfig(e.target, true);
+
+  // Проверяем введен ли символ
+  if (value.length == 1) {
+    // Attach the letter to the final word
+    finalWord += value;
+    // Проверяем, не превышено ли максимальное количество введенных символов
+    if (inputCount < 4) {
+      // Enable next
+      updateDivConfig(e.target.nextSibling, false);
+    }
+    // Увеличиваем inputCount только если он не превышает 4
+    if (inputCount < 5) {
+      inputCount += 1;
+    }
   }
 };
 
@@ -156,7 +159,7 @@ const validateWord = async () => {
   let currentInputs = inputRow[tryCount].querySelectorAll(".input-box");
   //Check if it is a valid english word
   await fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${finalWord}`
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${finalWord}`
   ).then((response) => {
     if (response.status == "404") {
       console.clear();
@@ -180,8 +183,8 @@ const validateWord = async () => {
       successCount += 1;
       successLetters += randomWord[i];
     } else if (
-      randomWord.includes(finalWord[i]) &&
-      !successLetters.includes(finalWord[i])
+        randomWord.includes(finalWord[i]) &&
+        !successLetters.includes(finalWord[i])
     ) {
       //If the letter exist in the chosen word and is not present in the success array then yellow
       currentInputs[i].classList.add("exists");

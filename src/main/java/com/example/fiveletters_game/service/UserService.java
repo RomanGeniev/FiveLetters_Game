@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -25,8 +27,18 @@ public class UserService {
 
     public void save(@NonNull User user){
         user.setRole("USER");
+        user.setHighScore(0);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    public List<User> getUsersList(){
+        List<User> users = userRepository.findAll();
+        return users;
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
     }
 
 //    public boolean checkName(User user){

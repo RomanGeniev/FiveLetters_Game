@@ -18,4 +18,5 @@ public class User {
     @NotBlank
     private String password;
     private String role;
+    private int highScore;
 }

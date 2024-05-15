@@ -43,6 +43,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "/home", "/playPage", "/playing","/login","/save","/registration","registerPage","login").permitAll()
                         .requestMatchers("/templates/**", "/static/**", "resources/static/script.js", "static/script.js").permitAll()
                         .requestMatchers("/hello","index").authenticated()
+                        .requestMatchers("/admin","/delete/{id}","/delete").authenticated()
 
                 )
                 .formLogin((form) -> form
